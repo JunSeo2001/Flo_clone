@@ -42,8 +42,14 @@ class HomeFragment : Fragment() {
         binding.homeTodayMusicAlbumRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         albumRVAdapter.setMyItemClickListener(object : AlbumRVAdapter.MyItemClickListener{
-            override fun onItemClick(album: Album) {
-                changeAlbumFragment(album)
+            // 앨범 커버 클릭 시의 동작
+            override fun onGoAlbumClick(album: Album) {
+                changeAlbumFragment(album) // 함수 이름 오타 수정
+            }
+
+            // 재생 버튼 클릭 시의 동작
+            override fun onPlayClick(album: Album) {
+                (activity as MainActivity).updateMiniPlayer(album)
             }
         })
 

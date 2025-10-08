@@ -9,8 +9,8 @@ import java.util.ArrayList
 class AlbumRVAdapter(private val albumList: ArrayList<Album>): RecyclerView.Adapter<AlbumRVAdapter.ViewHolder>() {
 
     interface MyItemClickListener{
-        fun onItemClick(album: Album)
-        fun onRemoveAlbum(position: Int)
+        fun onPlayClick(album: Album)       // 재생버튼 클릭
+        fun onGoAlbumClick(album: Album)    // 앨범 이동 클릭
     }
 
     private lateinit var mItemClickListener: MyItemClickListener
@@ -36,8 +36,14 @@ class AlbumRVAdapter(private val albumList: ArrayList<Album>): RecyclerView.Adap
 
     override fun onBindViewHolder(holder: AlbumRVAdapter.ViewHolder, position: Int) {
         holder.bind(albumList[position])
-        holder.itemView.setOnClickListener{mItemClickListener.onItemClick(albumList[position])}
+        holder.binding.itemAlbumPlayImgIv.setOnClickListener {
+            mItemClickListener.onPlayClick(albumList[position])
+        }
 
+        // (3) 앨범 커버 이미지 클릭 리스너
+        holder.binding.itemAlbumCoverImgIv.setOnClickListener {
+            mItemClickListener.onGoAlbumClick(albumList[position])
+        }
     }
 
     override fun getItemCount(): Int = albumList.size

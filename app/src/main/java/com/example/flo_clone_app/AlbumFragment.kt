@@ -30,16 +30,16 @@ class AlbumFragment : Fragment(){
         val album = gson.fromJson(albumJson, Album::class.java)
         setInit(album)
 
-
         binding.albumBackIv.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment()).commitAllowingStateLoss()
         }
 
+        // ViewPager와 TabLayout 설정 부분만 남깁니다.
         val albumVPAdapter = AlbumVPAdapter(this)
         binding.albumContentVp.adapter = albumVPAdapter
         TabLayoutMediator(binding.albumContentTb, binding.albumContentVp){
-            tab, positon ->
-            tab.text = information[positon]
+                tab, position -> // 변수명 positon -> position으로 수정하면 더 좋습니다.
+            tab.text = information[position]
         }.attach()
 
         return binding.root

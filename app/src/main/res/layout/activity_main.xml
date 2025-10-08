@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".activity.MainActivity">
 
     <FrameLayout
@@ -19,19 +20,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#F9F9F9"
-        android:paddingVertical="5dp"
         app:layout_constraintBottom_toTopOf="@id/main_bnv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
+        <SeekBar
+            android:id="@+id/main_progress_sb"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@null"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            android:progress="0"
+            android:progressBackgroundTint="@color/gray_color"
+            android:progressTint="@color/purple_500"
+            android:thumb="@color/transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
         <LinearLayout
+            android:id="@+id/main_miniplayer_info_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:orientation="vertical"
+            android:paddingVertical="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/main_progress_sb">
 
             <TextView
                 android:id="@+id/main_miniplayer_title_tv"
@@ -51,12 +68,13 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/main_miniplayer_btn_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/main_progress_sb">
 
             <ImageView
                 android:layout_width="40dp"
@@ -64,7 +82,7 @@
                 android:src="@drawable/btn_miniplayer_previous" />
 
             <ImageView
-                android:id="@+id/main_miniplayer_btn"
+                android:id="@+id/main_miniplayer_play_iv"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/btn_miniplayer_play" />
