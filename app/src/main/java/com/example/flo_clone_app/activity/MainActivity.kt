@@ -9,6 +9,7 @@ import com.example.flo_clone_app.LockerFragment
 import com.example.flo_clone_app.LookFragment
 import com.example.flo_clone_app.R
 import com.example.flo_clone_app.SearchFragment
+import com.example.flo_clone_app.data.Album
 import com.example.flo_clone_app.data.Song
 import com.example.flo_clone_app.databinding.ActivityMainBinding
 
@@ -35,6 +36,12 @@ class MainActivity : AppCompatActivity() {
         initBottomNavigation()
 
         Log.d("Song123", song.title + song.singer)
+    }
+
+    fun updateMiniPlayer(album: Album) {
+        binding.mainMiniplayerTitleTv.text = album.title
+        binding.mainMiniplayerSingerTv.text = album.singer
+        binding.mainProgressSb.progress = 0
     }
 
     private fun initBottomNavigation(){
