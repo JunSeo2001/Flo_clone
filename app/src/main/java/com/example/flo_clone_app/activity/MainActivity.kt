@@ -1,12 +1,15 @@
 package com.example.flo_clone_app.activity
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.example.flo_clone_app.HomeFragment
 import com.example.flo_clone_app.LockerFragment
 import com.example.flo_clone_app.LookFragment
+import com.example.flo_clone_app.PlayerManager
 import com.example.flo_clone_app.R
 import com.example.flo_clone_app.SearchFragment
 import com.example.flo_clone_app.data.Album
@@ -36,6 +39,31 @@ class MainActivity : AppCompatActivity() {
         initBottomNavigation()
 
         Log.d("Song123", song.title + song.singer)
+
+        val uri = Uri.parse("android.resource://${packageName}/${R.raw.music_lilac}")
+        PlayerManager.initAndPlay(this, uri)
+
+        // 미니 플레이어 UI 버튼 연결
+        binding.mainMiniplayerPlayIv.setOnClickListener {
+            PlayerManager.playPause()
+        }
+        binding.mainPauseBtn.setOnClickListener {
+            PlayerManager.playPause()
+        }
+
+        // PlayerManager 상태 변화 감지해서 Seekbar / 아이콘 업데이트
+        PlayerManager.attach { state ->
+            binding.mainProgressSb.max = state.duration
+            binding.mainProgressSb.progress = state.position
+
+            if (state.isPlaying){
+                binding.mainMiniplayerPlayIv.visibility = View.GONE
+                binding.mainPauseBtn.visibility = View.VISIBLE
+            } else {
+                binding.mainMiniplayerPlayIv.visibility = View.VISIBLE
+                binding.mainPauseBtn.visibility = View.GONE
+            }
+        }
     }
 
     fun updateMiniPlayer(album: Album) {

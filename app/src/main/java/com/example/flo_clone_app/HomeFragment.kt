@@ -107,9 +107,8 @@ class HomeFragment : Fragment() {
             // 필요 시 스크롤 충돌 완화
             // isNestedScrollingEnabled = false
         }
-
         // 점(Indicator) 연결
-        TabLayoutMediator(binding.homeBannerIndicator, binding.homeBannerViewPager) { _, _ -> }.attach()
+        binding.homeBannerIndicator.setViewPager(binding.homeBannerViewPager)
     }
 
     /** 하단 배너: 기존 방식 유지 (ViewPager2 + Fragment 어댑터) */
